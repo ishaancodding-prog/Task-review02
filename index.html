@@ -3,81 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Task Review - Semester Roadmap</title>
+    <title>Daily Task Review & Comeback Tracker</title>
     <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent-color: #3498db;
+            --accent-hover: #2980b9;
+            --border-color: #333333;
+            --success-color: #27ae60;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
             max-width: 900px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
+            line-height: 1.5;
         }
+
         h1 {
             text-align: center;
-            color: #2c3e50;
+            color: #ffffff;
+            font-size: 1.75rem;
+            margin-bottom: 5px;
         }
+
         p.subtitle {
             text-align: center;
-            color: #7f8c8d;
-            margin-bottom: 30px;
-        }
-        .day-container {
-            background: #ffffff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            color: var(--text-muted);
             margin-bottom: 20px;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            font-size: 0.95rem;
         }
-        .day-title {
-            font-size: 1.25em;
-            color: #2980b9;
-            margin-top: 0;
-            border-bottom: 2px solid #ecf0f1;
+
+        /* Motivational Aim Banner */
+        .aim-banner {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            border: 1px solid #34495e;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .aim-banner h3 {
+            margin: 0 0 5px 0;
+            color: #3498db;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .aim-banner p {
+            margin: 0;
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        /* Stats & Progress Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        /* Day Containers */
+        .day-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 8px;
+            margin-bottom: 10px;
         }
+
+        .day-title {
+            font-size: 1.15em;
+            color: #3498db;
+            margin: 0;
+        }
+
+        .day-progress {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: #2a2a2a;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
         ul {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
+
         li {
-            padding: 8px 0;
-            border-bottom: 1px solid #f9f9f9;
+            padding: 10px 0;
+            border-bottom: 1px solid #2a2a2a;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
+
         li:last-child {
             border-bottom: none;
         }
+
         input[type="checkbox"] {
+            margin-top: 3px;
             margin-right: 12px;
-            transform: scale(1.2);
+            transform: scale(1.3);
             cursor: pointer;
+            accent-color: var(--accent-color);
+            flex-shrink: 0;
         }
+
         label {
             cursor: pointer;
+            word-break: break-word;
+            flex-grow: 1;
+            font-size: 0.95rem;
         }
+
         .completed {
             text-decoration: line-through;
-            color: #95a5a6;
+            color: var(--text-muted);
+            opacity: 0.7;
         }
+
         .task-category {
-            font-weight: bold;
-            font-size: 0.85em;
-            color: #7f8c8d;
-            margin-left: 8px;
-            background: #ecf0f1;
+            font-size: 0.75em;
+            color: var(--text-muted);
+            background: #2a2a2a;
             padding: 2px 6px;
             border-radius: 4px;
+            margin-left: 8px;
+            white-space: nowrap;
+            align-self: center;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            .day-container {
+                padding: 12px;
+            }
+            label {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Daily Task Review</h1>
-    <p class="subtitle">Check off your tasks as you complete them each day.</p>
+    <h1>Comeback Daily Tracker</h1>
+    <p class="subtitle">Execute the system. Own your trajectory.</p>
+
+    <!-- Motivational Aim Banner -->
+    <div class="aim-banner">
+        <h3>My Ultimate Aim</h3>
+        <p>Build a bulletproof technical foundation, push my CGPA toward a 7.5 safety zone, and secure an elite global future.</p>
+    </div>
+
+    <!-- Live Stats Dashboard -->
+    <div class="dashboard">
+        <div class="stat-card">
+            <h4>Tasks Completed This Week</h4>
+            <div class="stat-value" id="total-completed">0 / 0</div>
+        </div>
+        <div class="stat-card">
+            <h4>Weekly Completion Rate</h4>
+            <div class="stat-value" id="completion-rate">0%</div>
+        </div>
+    </div>
 
     <div id="app"></div>
 
@@ -148,15 +293,54 @@
         ];
 
         const app = document.getElementById('app');
+        const totalCompletedEl = document.getElementById('total-completed');
+        const completionRateEl = document.getElementById('completion-rate');
+
+        function updateGlobalStats() {
+            let totalTasks = 0;
+            let completedTasks = 0;
+
+            scheduleData.forEach((dayObj, dayIndex) => {
+                dayObj.tasks.forEach((task, taskIndex) => {
+                    totalTasks++;
+                    const checkboxId = `day-${dayIndex}-task-${taskIndex}`;
+                    if (localStorage.getItem(checkboxId) === 'true') {
+                        completedTasks++;
+                    }
+                });
+                
+                // Update individual day counters
+                const dayChecked = document.querySelectorAll(`.day-${dayIndex}-checkbox:checked`).length;
+                const dayTotal = dayObj.tasks.length;
+                const counterEl = document.getElementById(`counter-${dayIndex}`);
+                if (counterEl) {
+                    counterEl.textContent = `${dayChecked}/${dayTotal} done`;
+                }
+            });
+
+            totalCompletedEl.textContent = `${completedTasks} / ${totalTasks}`;
+            const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
+            completionRateEl.textContent = `${percentage}%`;
+        }
 
         scheduleData.forEach((dayObj, dayIndex) => {
             const container = document.createElement('div');
             container.className = 'day-container';
 
-            const title = document.createElement('h2');
+            const header = document.createElement('div');
+            header.className = 'day-header';
+
+            const title = document.createElement('h3');
             title.className = 'day-title';
             title.textContent = dayObj.day;
-            container.appendChild(title);
+            header.appendChild(title);
+
+            const dayProgress = document.createElement('span');
+            dayProgress.className = 'day-progress';
+            dayProgress.id = `counter-${dayIndex}`;
+            header.appendChild(dayProgress);
+
+            container.appendChild(header);
 
             const ul = document.createElement('ul');
 
@@ -164,10 +348,10 @@
                 const li = document.createElement('li');
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
+                checkbox.className = `day-${dayIndex}-checkbox`;
                 const checkboxId = `day-${dayIndex}-task-${taskIndex}`;
                 checkbox.id = checkboxId;
 
-                // Load saved state from localStorage if available
                 const savedState = localStorage.getItem(checkboxId);
                 if (savedState === 'true') {
                     checkbox.checked = true;
@@ -189,6 +373,7 @@
                         label.classList.remove('completed');
                         localStorage.setItem(checkboxId, 'false');
                     }
+                    updateGlobalStats();
                 });
 
                 const badge = document.createElement('span');
@@ -204,6 +389,9 @@
             container.appendChild(ul);
             app.appendChild(container);
         });
+
+        // Initial calculation on load
+        updateGlobalStats();
     </script>
 </body>
 </html>
