@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comeback Daily Tracker & Time Blocks</title>
+    <title>Comeback Daily Time-Block Tracker</title>
     <style>
         :root {
             --bg-color: #121212;
@@ -14,6 +14,7 @@
             --accent-hover: #2980b9;
             --border-color: #333333;
             --success-color: #27ae60;
+            --time-color: #f39c12;
         }
 
         body {
@@ -141,7 +142,7 @@
         }
 
         li {
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #2a2a2a;
             display: flex;
             align-items: flex-start;
@@ -152,19 +153,12 @@
         }
 
         input[type="checkbox"] {
-            margin-top: 3px;
+            margin-top: 4px;
             margin-right: 12px;
             transform: scale(1.3);
             cursor: pointer;
             accent-color: var(--accent-color);
             flex-shrink: 0;
-        }
-
-        label {
-            cursor: pointer;
-            word-break: break-word;
-            flex-grow: 1;
-            font-size: 0.95rem;
         }
 
         .task-content {
@@ -174,10 +168,17 @@
         }
 
         .task-time {
-            font-size: 0.8rem;
-            color: #f39c12;
+            font-size: 0.85rem;
+            color: var(--time-color);
             font-weight: bold;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
+        }
+
+        label {
+            cursor: pointer;
+            word-break: break-word;
+            flex-grow: 1;
+            font-size: 0.95rem;
         }
 
         .completed {
@@ -197,27 +198,18 @@
             align-self: flex-start;
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-            h1 {
-                font-size: 1.5rem;
-            }
-            .day-container {
-                padding: 12px;
-            }
-            label {
-                font-size: 0.9rem;
-            }
+            body { padding: 10px; }
+            h1 { font-size: 1.5rem; }
+            .day-container { padding: 12px; }
+            label { font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <h1>Comeback Daily Tracker</h1>
-    <p class="subtitle">Time-blocked schedule and task manager around your classes.</p>
+    <h1>Comeback Daily Time-Block Tracker</h1>
+    <p class="subtitle">Structured post-college hours with precise 1-hour rest buffers and targeted study blocks.</p>
 
     <!-- Motivational Aim Banner -->
     <div class="aim-banner">
@@ -244,70 +236,80 @@
             {
                 day: "Monday",
                 tasks: [
-                    { time: "11:00 - 13:00", text: "Classes: DSA (11-12) & Technical Communication (12-13)", category: "College" },
-                    { time: "13:00 - 14:00", text: "Lunch break and class notes organization", category: "Immediate" },
-                    { time: "14:00 - 15:00", text: "30-min review of DSA & Comm notes", category: "Immediate" },
-                    { time: "15:00 - 16:00", text: "Class: Foundations of IT", category: "College" },
-                    { time: "16:30 - 17:30", text: "Practice DSA logic (Arrays/Strings revision)", category: "Academic" },
-                    { time: "18:00 - 19:00", text: "30 mins of Python scripting or coding practice", category: "Skill-Building" }
+                    { time: "11:00 AM - 01:00 PM", text: "College Classes: Data Structures & Technical Communication", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break (Unwind after morning lectures)", category: "Rest" },
+                    { time: "02:00 PM - 03:00 PM", text: "Note Review: 30-min quick scan of DSA & Comm notes, 30-min lab/class organization", category: "Academic" },
+                    { time: "03:00 PM - 04:00 PM", text: "College Class: Foundations of Information Technology", category: "College" },
+                    { time: "04:00 PM - 05:00 PM", text: "Rest & Buffer Block (Transition back home/hostel)", category: "Rest" },
+                    { time: "05:00 PM - 06:30 PM (1.5 Hours)", text: "Core Study Block: Practice DSA logic (Arrays/Strings revision & code writing)", category: "Core Study" },
+                    { time: "06:30 PM - 07:30 PM (1 Hour)", text: "Skill Building: Python scripting or coding practice", category: "Skill-Building" }
                 ]
             },
             {
                 day: "Tuesday",
                 tasks: [
-                    { time: "10:00 - 13:00", text: "Classes: DSA (10-11) & Digital Electronics Labs (11-13)", category: "College" },
-                    { time: "13:00 - 14:00", text: "Lunch break and pending lab write-ups wrap-up", category: "Immediate" },
-                    { time: "14:00 - 16:00", text: "Classes: Probability & Stats Tutorials (14-16)", category: "College" },
-                    { time: "16:00 - 17:00", text: "Class: Formal Languages & Automata Theory (16-17)", category: "College" },
-                    { time: "17:30 - 18:30", text: "Solve 3–5 numericals for Probability & Statistics", category: "Academic" },
-                    { time: "19:00 - 19:30", text: "Push code snippets/exercises to your public GitHub repo", category: "Skill-Building" }
+                    { time: "10:00 AM - 01:00 PM", text: "College Classes & Labs: Data Structures & Digital Electronics Practical", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break", category: "Rest" },
+                    { time: "02:00 PM - 04:00 PM", text: "College Classes: Probability & Statistics Tutorials", category: "College" },
+                    { time: "04:00 PM - 05:00 PM", text: "College Class: Formal Languages & Automata Theory", category: "College" },
+                    { time: "05:00 PM - 06:00 PM", text: "Rest & Mental Reset (Post-college break)", category: "Rest" },
+                    { time: "06:00 PM - 07:30 PM (1.5 Hours)", text: "Core Study Block: Solve 3–5 numerical problems for Probability & Statistics", category: "Core Study" },
+                    { time: "07:30 PM - 08:30 PM (1 Hour)", text: "Skill Building: Push code snippets & exercises to public GitHub repo", category: "Skill-Building" }
                 ]
             },
             {
                 day: "Wednesday",
                 tasks: [
-                    { time: "09:00 - 13:00", text: "Classes: IT Foundations (9-10), Stats (10-11), Digital Electronics (11-12), IT Foundations (12-13)", category: "College" },
-                    { time: "13:00 - 15:00", text: "Lunch break and mental reset block", category: "Immediate" },
-                    { time: "15:00 - 17:00", text: "Practicals: DSA / IT Foundations Labs", category: "College" },
-                    { time: "17:30 - 18:30", text: "Practice core coding implementation for current DSA topics", category: "Academic" },
-                    { time: "19:00 - 19:30", text: "Review basic API structures or data handling scripts", category: "Skill-Building" }
+                    { time: "09:00 AM - 01:00 PM", text: "Intense College Block: IT Foundations, Stats, Digital Electronics", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break", category: "Rest" },
+                    { time: "02:00 PM - 03:00 PM", text: "Buffer / Quiet Rest Period", category: "Rest" },
+                    { time: "03:00 PM - 05:00 PM", text: "College Practicals: DSA / IT Foundations Labs", category: "College" },
+                    { time: "05:00 PM - 06:00 PM", text: "Rest & Transition Break", category: "Rest" },
+                    { time: "06:00 PM - 07:30 PM (1.5 Hours)", text: "Core Study Block: Practice core coding implementation for active DSA topics", category: "Core Study" },
+                    { time: "07:30 PM - 08:30 PM (1 Hour)", text: "Skill Building: Review basic API structures or data handling scripts", category: "Skill-Building" }
                 ]
             },
             {
                 day: "Thursday",
                 tasks: [
-                    { time: "10:00 - 13:00", text: "Classes: DSA (10-11), Technical Communication (11-12), Digital Electronics (12-13)", category: "College" },
-                    { time: "13:00 - 14:00", text: "Lunch break and Thursday lab files organization", category: "Immediate" },
-                    { time: "15:00 - 17:00", text: "Practical: DSA Lab (IT-2)", category: "College" },
-                    { time: "17:30 - 18:30", text: "Solve circuit problems or logic minimization for Digital Electronics", category: "Academic" },
-                    { time: "19:00 - 19:30", text: "30 mins of independent coding/problem-solving", category: "Skill-Building" }
+                    { time: "10:00 AM - 01:00 PM", text: "College Classes: DSA, Technical Communication, Digital Electronics", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break", category: "Rest" },
+                    { time: "02:00 PM - 03:00 PM", text: "Administrative: Organize Thursday lab files and notes", category: "Academic" },
+                    { time: "03:00 PM - 05:00 PM", text: "College Practical: DSA Lab (IT-2)", category: "College" },
+                    { time: "05:00 PM - 06:00 PM", text: "Rest & Recovery Break", category: "Rest" },
+                    { time: "06:00 PM - 07:30 PM (1.5 Hours)", text: "Core Study Block: Solve circuit problems & logic minimization for Digital Electronics", category: "Core Study" },
+                    { time: "07:30 PM - 08:30 PM (1 Hour)", text: "Skill Building: Independent coding & algorithm problem-solving", category: "Skill-Building" }
                 ]
             },
             {
                 day: "Friday",
                 tasks: [
-                    { time: "10:00 - 13:00", text: "Classes: Stats (10-11), Technical Communication (11-12), Digital Electronics (12-13)", category: "College" },
-                    { time: "13:00 - 15:00", text: "Lunch break and daily clutter cleanup", category: "Immediate" },
-                    { time: "15:00 - 17:00", text: "Practical: Digital Electronics Lab", category: "College" },
-                    { time: "17:30 - 18:30", text: "Review Probability & Statistics formulas and problem sets", category: "Academic" },
-                    { time: "19:00 - 19:30", text: "Finalize code commits for the week on GitHub", category: "Skill-Building" }
+                    { time: "10:00 AM - 01:00 PM", text: "College Classes: Stats, Technical Communication, Digital Electronics", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break", category: "Rest" },
+                    { time: "02:00 PM - 03:00 PM", text: "Cleanup Block: Clear daily clutter and tidy up desk notes", category: "Academic" },
+                    { time: "03:00 PM - 05:00 PM", text: "College Practical: Digital Electronics Lab", category: "College" },
+                    { time: "05:00 PM - 06:00 PM", text: "Rest & End-of-Week Decompress", category: "Rest" },
+                    { time: "06:00 PM - 07:30 PM (1.5 Hours)", text: "Core Study Block: Review Probability & Statistics formulas and problem sets", category: "Core Study" },
+                    { time: "07:30 PM - 08:30 PM (1 Hour)", text: "Skill Building: Finalize and commit code updates for the week on GitHub", category: "Skill-Building" }
                 ]
             },
             {
                 day: "Saturday",
                 tasks: [
-                    { time: "09:00 - 13:00", text: "Classes: IT Foundations Lab (9-11), Automata Theory (11-12), Probability & Stats (12-13)", category: "College" },
-                    { time: "13:00 - 14:00", text: "Lunch break and minor task cleanup", category: "Immediate" },
-                    { time: "14:00 - 18:00", text: "NSS / NCC Commitment Block (IT Complex)", category: "College" },
-                    { time: "18:30 - 19:30", text: "Light review only (avoid heavy study due to fatigue)", category: "Academic" }
+                    { time: "09:00 AM - 01:00 PM", text: "College Classes & Lab: IT Lab, Automata Theory, Probability & Stats", category: "College" },
+                    { time: "01:00 PM - 02:00 PM", text: "Rest & Lunch Break", category: "Rest" },
+                    { time: "02:00 PM - 06:00 PM", text: "College Commitment: NSS / NCC Block (IT Complex)", category: "College" },
+                    { time: "06:00 PM - 07:00 PM", text: "Rest & Physical Recovery after long NCC shift", category: "Rest" },
+                    { time: "07:00 PM - 08:00 PM (1 Hour)", text: "Light Academic Review: Quick scan of weekly topics to prevent burnout", category: "Core Study" }
                 ]
             },
             {
                 day: "Sunday",
                 tasks: [
-                    { time: "10:00 - 11:00", text: "Weekly planning and desk organization", category: "Immediate" },
-                    { time: "11:00 - 13:00", text: "Clear any study backlogs from the week", category: "Academic" },
-                    { time: "15:00 - 16:30", text: "Work on a small personal project or explore basic AI concepts", category: "Skill-Building" }
+                    { time: "10:00 AM - 11:00 AM", text: "Weekly Planning: Organize tasks and clean desk space", category: "Academic" },
+                    { time: "11:00 AM - 01:00 PM (2 Hours)", text: "Backlog Clearance: Catch up on any missed study notes or uncompleted problem sets", category: "Core Study" },
+                    { time: "01:00 PM - 03:00 PM", text: "Extended Rest, Lunch & Free Time", category: "Rest" },
+                    { time: "03:00 PM - 05:00 PM (2 Hours)", text: "Project Block: Work on a small personal project or explore foundational AI concepts", category: "Skill-Building" }
                 ]
             }
         ];
@@ -341,6 +343,8 @@
             const percentage = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
             completionRateEl.textContent = `${percentage}%`;
         }
+
+        scheduleData.exports = {}; // placeholder safeguard
 
         scheduleData.forEach((dayObj, dayIndex) => {
             const container = document.createElement('div');
