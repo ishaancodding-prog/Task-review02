@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Task Review - Semester Roadmap</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .day-container {
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .day-title {
+            font-size: 1.25em;
+            color: #2980b9;
+            margin-top: 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px solid #f9f9f9;
+            display: flex;
+            align-items: center;
+        }
+        li:last-child {
+            border-bottom: none;
+        }
+        input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            cursor: pointer;
+        }
+        label {
+            cursor: pointer;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #95a5a6;
+        }
+        .task-category {
+            font-weight: bold;
+            font-size: 0.85em;
+            color: #7f8c8d;
+            margin-left: 8px;
+            background: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Daily Task Review</h1>
+    <p class="subtitle">Check off your tasks as you complete them each day.</p>
+
+    <div id="app"></div>
+
+    <script>
+        const scheduleData = [
+            {
+                day: "Monday",
+                tasks: [
+                    { text: "30-min review of DSA & Comm notes", category: "Immediate" },
+                    { text: "Organize lab/class notes", category: "Immediate" },
+                    { text: "Practice DSA logic (Arrays/Strings revision)", category: "Academic" },
+                    { text: "30 mins of Python scripting or coding practice", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Tuesday",
+                tasks: [
+                    { text: "Clean up notes from Digital & Stats tutorials", category: "Immediate" },
+                    { text: "Complete any pending lab write-ups", category: "Immediate" },
+                    { text: "Solve 3–5 numericals for Probability & Statistics", category: "Academic" },
+                    { text: "Push code snippets/exercises to your public GitHub repo", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Wednesday",
+                tasks: [
+                    { text: "Short physical/mental break after lecture/lab block", category: "Immediate" },
+                    { text: "Quick skim of IT Foundations notes", category: "Immediate" },
+                    { text: "Practice core coding implementation for current DSA topics", category: "Academic" },
+                    { text: "Review basic API structures or data handling scripts", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Thursday",
+                tasks: [
+                    { text: "Review notes from Digital Electronics & DSA", category: "Immediate" },
+                    { text: "Organize Thursday lab files", category: "Immediate" },
+                    { text: "Solve circuit problems or logic minimization for Digital Electronics", category: "Academic" },
+                    { text: "30 mins of independent coding/problem-solving", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Friday",
+                tasks: [
+                    { text: "Wind down after the final lab session of the week", category: "Immediate" },
+                    { text: "Clear out daily clutter", category: "Immediate" },
+                    { text: "Review Probability & Statistics formulas and problem sets", category: "Academic" },
+                    { text: "Finalize code commits for the week on GitHub", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Saturday",
+                tasks: [
+                    { text: "Complete minor tasks after morning classes", category: "Immediate" },
+                    { text: "Rest after the NSS/NCC block (14:00 - 18:00)", category: "Immediate" },
+                    { text: "Light review only (avoid heavy study due to fatigue)", category: "Academic" },
+                    { text: "None (Focus on physical rest and recovery)", category: "Skill-Building" }
+                ]
+            },
+            {
+                day: "Sunday",
+                tasks: [
+                    { text: "Weekly planning and desk organization", category: "Immediate" },
+                    { text: "Clear any study backlogs from the week", category: "Academic" },
+                    { text: "Work on a small personal project or explore basic AI concepts", category: "Skill-Building" }
+                ]
+            }
+        ];
+
+        const app = document.getElementById('app');
+
+        scheduleData.forEach((dayObj, dayIndex) => {
+            const container = document.createElement('div');
+            container.className = 'day-container';
+
+            const title = document.createElement('h2');
+            title.className = 'day-title';
+            title.textContent = dayObj.day;
+            container.appendChild(title);
+
+            const ul = document.createElement('ul');
+
+            dayObj.tasks.forEach((task, taskIndex) => {
+                const li = document.createElement('li');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                const checkboxId = `day-${dayIndex}-task-${taskIndex}`;
+                checkbox.id = checkboxId;
+
+                // Load saved state from localStorage if available
+                const savedState = localStorage.getItem(checkboxId);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                }
+
+                const label = document.createElement('label');
+                label.htmlFor = checkboxId;
+                label.textContent = task.text;
+
+                if (checkbox.checked) {
+                    label.classList.add('completed');
+                }
+
+                checkbox.addEventListener('change', () => {
+                    if (checkbox.checked) {
+                        label.classList.add('completed');
+                        localStorage.setItem(checkboxId, 'true');
+                    } else {
+                        label.classList.remove('completed');
+                        localStorage.setItem(checkboxId, 'false');
+                    }
+                });
+
+                const badge = document.createElement('span');
+                badge.className = 'task-category';
+                badge.textContent = task.category;
+
+                li.appendChild(checkbox);
+                li.appendChild(label);
+                li.appendChild(badge);
+                ul.appendChild(li);
+            });
+
+            container.appendChild(ul);
+            app.appendChild(container);
+        });
+    </script>
+</body>
+</html>
